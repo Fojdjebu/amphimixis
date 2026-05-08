@@ -12,39 +12,52 @@ Amphimixis is an automated project intelligence and evaluation tool for performa
 
 Amphimixis simplifies migration readiness exploration and performance analysis by partially implementing our [methodology](docs/migration-readiness-exploring-methodology.md).
 
-> Amphimixis uses `perf` for profiling, makes cross-table with two builds per CPU event for comparison.
+> Amphimixis uses `perf` for profiling and can generate a cross‑table comparing two builds per CPU event.
+
+## Performance cross-table example
+
+The cross‑table below was generated using the configuration file on the right. It compares two builds of a YAML‑based project on a local x86 machine (CMake + Ninja, two builds sharing executables via YAML anchors).
 
 <p align="center">
-  <img src="docs/tinyxml2-cross-table-example.png" alt="Cross-table example" width="800"><br>
+  <img src="docs/tinyxml2-cross-table-example.png" alt="Cross-table example" width="100%">
 </p>
+
+<table width="100%">
+  <tr>
+    <td width="55%">
+      <p>
+        <strong>What does the configuration contain?</strong><br>
+        The file on the right defines:
+        <ul>
+          <li>One x86 platform (address, credentials, SSH port).</li>
+          <li>Two recipes with identical compiler flags (<code>-O2</code>) and the same toolchain (<code>g++</code>).</li>
+          <li>Two builds, each referencing the same recipe, both using an executable list tied to a YAML anchor to avoid duplication.</li>
+        </ul>
+        <strong>Why are there zeros in the cross‑table?</strong><br>
+        The two builds were executed on different architectures: <code>1_1_1</code> on **RISC‑V** and <code>2_2_2</code> on **x86**. Perf events like `cache‑misses` have different naming conventions or are not available on RISC‑V. That is why the first build shows zeros for those metrics, while the second build records actual numbers. The delta column highlights only the differences that appear in both builds, making it easy to spot architecture‑specific behaviour.
+      </p>
+    </td>
+    <td width="45%">
+      <p align="center">
+        <img src="docs/config-example.png" alt="Configuration file example" width="90%">
+        <br>
+        <i>Configuration file (CMake + Ninja)</i>
+      </p>
+    </td>
+  </tr>
+</table>
 
 ## Requirements
 
 - Python 3.12 or later
 - Linux
-- `rsync` on each machine
-- `sshpass` available on the machine where you run Amphimixis, if you connect to remote machines with passwords
-- `perf` and `perf archive`<sup><a href="#note1">1</a></sup> available on each `run_machine`
-- A supported build setup in the target project: CMake as the build system and Make as the low-level runner
+- `rsync` on each machine, `sshpass` on the machine that connects to remote hosts with passwords
+- `perf` and `perf archive` on each `run_machine`
+- Target project must support CMake as the build system and Make or Ninja as the low-level runner
 
-Install system dependencies on each machine before running Amphimixis:
+Installation commands for system dependencies are available in [Troubleshooting → System Dependencies](docs/troubleshooting.md).
 
-```bash
-# on each machine
-apt install rsync
-
-# on the machine where you run Amphimixis
-apt install sshpass
-
-# on each run_machine (provides perf and perf archive)
-apt install linux-tools-common linux-tools
-```
-
-<p id="note1">
-
-1. More about `perf archive` in [Usage guide](docs/usage_guide.md).
-
-## Quick run
+## Quick start
 
 If you want to try Amphimixis right away, create a virtual environment, install the package from GitHub, and run the full pipeline on a target project:
 
@@ -95,9 +108,9 @@ amixis run /path/to/project
 This command:
 
 1. analyzes the project
-2. builds it using the selected configuration
-3. profiles the resulting executables
-4. prints profiling results in the console
+1. builds it using the selected configuration
+1. profiles the resulting executables
+1. prints profiling results in the console
 
 To compare two collected `perf` outputs:
 
@@ -147,23 +160,14 @@ Additional documentation:
 
 ## How To Help
 
-Contributions are welcome.
-
-- Report bugs and suggest improvements through GitHub Issues
-- Open a Pull Request with a clear description of the problem and the proposed change
-- Add or improve tests for new behavior
-- Update documentation when changing CLI behavior or configuration format
-
-Before contributing, make sure local checks pass:
+Contributions are welcome. Before submitting a pull request, make sure local checks pass:
 
 ```bash
 ci/runner.sh
 ```
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details on bug reports, pull request guidelines, and test categories.
+
 ## License
 
-The project is distributed under the license in [LICENSE](LICENSE).
-
-## Third-Party Licenses
-
-This project includes dependencies under various licenses. See [NOTICE.md](NOTICE.md) and the [third_party_licenses/](third_party_licenses/) directory for details.
+The project is distributed under the [MIT License](LICENSE). This project includes dependencies under various licenses — see [NOTICE.md](NOTICE.md) and the [third_party_licenses/](third_party_licenses/) directory for details.
