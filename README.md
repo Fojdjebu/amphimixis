@@ -2,9 +2,7 @@
 [![Docs](https://img.shields.io/badge/docs-available-blue)](https://github.com/ebzych/amphimixis/tree/main/docs)
 [![License](https://img.shields.io/github/license/ebzych/amphimixis?color=8A2BE2)](https://github.com/ebzych/amphimixis/blob/main/LICENSE)
 
-<p align="center">
-  <img src="docs/logo.jpg" alt="Amphimixis Logo" width="800"><br>
-</p>
+![Amphimixis Logo](docs/logo.jpg)
 
 # Amphimixis
 
@@ -16,34 +14,16 @@ Amphimixis is an automated project intelligence and evaluation tool for performa
 
 The cross‑table below was generated using the configuration file on the right. It compares two builds of a YAML‑based project on a local x86 machine (CMake + Ninja, two builds sharing executables via YAML anchors).
 
-<p align="center">
-  <img src="docs/tinyxml2-cross-table-example.png" alt="Cross-table example" width="100%">
-</p>
+![Cross-table example](docs/tinyxml2-cross-table-example.png)
 
-<table width="100%">
-  <tr>
-    <td width="55%">
-      <p>
-        <strong>What does the configuration contain?</strong><br>
-        The file on the right defines:
-        <ul>
-          <li>One x86 platform (address, credentials, SSH port).</li>
-          <li>Two recipes with identical compiler flags (<code>-O2</code>) and the same toolchain (<code>g++</code>).</li>
-          <li>Two builds, each referencing the same recipe, both using an executable list tied to a YAML anchor to avoid duplication.</li>
-        </ul>
-        <strong>Why are there zeros in the cross‑table?</strong><br>
-        The two builds were executed on different architectures: <code>1_1_1</code> on **RISC‑V** and <code>2_2_2</code> on **x86**. Perf events like `cache‑misses` have different naming conventions or are not available on RISC‑V. That is why the first build shows zeros for those metrics, while the second build records actual numbers. The delta column highlights only the differences that appear in both builds, making it easy to spot architecture‑specific behaviour.
-      </p>
-    </td>
-    <td width="45%">
-      <p align="center">
-        <img src="docs/config-example.png" alt="Configuration file example" width="90%">
-        <br>
-        <i>Configuration file (CMake + Ninja)</i>
-      </p>
-    </td>
-  </tr>
-</table>
+**What does the configuration contain?**  
+The file on the right defines:
+- One x86 platform (address, credentials, SSH port).
+- Two recipes with identical compiler flags (`-O2`) and the same toolchain (`g++`).
+- Two builds, each referencing the same recipe, both using an executable list tied to a YAML anchor to avoid duplication.
+
+**Why are there zeros in the cross‑table?**  
+The two builds were executed on different architectures: `1_1_1` on **RISC‑V** and `2_2_2` on **x86**. Perf events like `cache‑misses` have different naming conventions or are not available on RISC‑V. That is why the first build shows zeros for those metrics, while the second build records actual numbers. The delta column highlights only the differences that appear in both builds, making it easy to spot architecture‑specific behaviour.
 
 ## Requirements
 
