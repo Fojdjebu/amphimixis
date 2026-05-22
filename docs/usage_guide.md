@@ -87,6 +87,10 @@ At minimum, `input.yml` should describe:
 
 In `builds`, you can optionally specify an `executables` list for each build. Each path must be relative to that build's output directory, for example `bin/my_app`. If `executables` is omitted, Amphimixis profiles the first executable file it finds in the build directory.
 
+### Using SSH keys
+
+You can use Amphimixis with SSH keys. See [Troubleshooting: sshpass not found](troubleshooting.md#sshpass-not-found) for setup.
+
 ## Run the main workflow
 
 ```bash
@@ -98,6 +102,13 @@ Use `--config` to specify a custom configuration file path:
 ```bash
 amixis run --config ./my_input.yml /path/to/project
 ```
+
+The full pipeline:
+
+1. analyzes the project
+1. builds it using the selected configuration
+1. profiles the resulting executables
+1. prints profiling results in the console
 
 ## Run individual commands
 
