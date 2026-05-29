@@ -18,6 +18,7 @@ The cross‑table below was generated using the configuration file on the right.
 
 **What does the configuration contain?**  
 The file on the right defines:
+
 - One x86 platform (address, credentials, SSH port).
 - Two recipes with identical compiler flags (`-O2`) and the same toolchain (`g++`).
 - Two builds, each referencing the same recipe, both using an executable list tied to a YAML anchor to avoid duplication.
