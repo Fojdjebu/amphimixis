@@ -18,9 +18,6 @@ The YAML configuration file consists of the following **top-level fields**:
 
 ---
 
-[^1]: `CMake` and `Make` are supported as build systems. If not specified, it is automatically selected from the set of build systems supported by the project.
-[^2]: `Make` and `Ninja` are supported as runners (low-level build system). If not specified, it is automatically selected from the supported runners of the selected build system.
-
 ```yaml
 build_system: CMake
 runner: Make
@@ -44,9 +41,6 @@ The **platforms** section describes the machines on which the project will be bu
 
 ---
 
-[^3]: Default value: 22. The `port` must be within the range 1-65535.
-[^4]: If the user uses SSH keys, start `ssh-agent` in the current shell and add the required keys for each remote machine manually with `ssh-add` before running Amphimixis. In this case, the password does not need to be provided. **Please note that passwords are passed to SSH through sshpass, which is not secure.**
-
 > **Note:**
 >
 > - If the `address` field is not specified, the local machine is assumed.
@@ -67,82 +61,6 @@ The **recipes** section describes the build configuration and compiler flags.
 | sysroot                                         | string  | (**Optional**) Path to the folder with system headers and libraries used by the toolchain |
 | jobs                                            | integer | (**Optional**) Number of parallel jobs used by the build system                           |
 
-[^5]:
-  <details>
-
-  <summary>Possible attributes:</summary>
-
-  - c_flags
-  - cxx_flags
-  - csharp_flags
-  - cuda_flags
-  - objc_flags
-  - objcxx_flags
-  - fortran_flags
-  - hip_flags
-  - ispc_flags
-  - swift_flags
-  - asm_flags
-  - asm_nasm_flags
-  - asm_marmasm_flags
-  - asm_masm_flags
-  - asm_att_flags
-
-  </details>
-
-[^6]:
-  <details>
-
-  <summary>Possible attributes of a toolchain:</summary>
-
-  - ar
-  - as
-  - ld
-  - nm
-  - objcopy
-  - objdump
-  - ranlib
-  - readelf
-  - strip
-  - c_compiler
-  - cxx_compiler
-  - csharp_compiler
-  - cuda_compiler
-  - objc_compiler
-  - objcxx_compiler
-  - fortran_compiler
-  - hip_compiler
-  - ispc_compiler
-  - swift_compiler
-  - asm_compiler
-  - asm_nasm_compiler
-  - asm_marmasm_compiler
-  - asm_masm_compiler
-  - asm_att_compiler
-
-  </details>
-
-<details>
-<summary>You can also specify flags to the toolchain:</summary>
-
-- c_flags
-- cxx_flags
-- csharp_flags
-- cuda_flags
-- objc_flags
-- objcxx_flags
-- fortran_flags
-- hip_flags
-- ispc_flags
-- swift_flags
-- asm_flags
-- asm_nasm_flags
-- asm_marmasm_flags
-- asm_masm_flags
-- asm_att_flags
-
-</details>
-
 ### Builds
 
 The **builds** section links platforms and recipes, defining which configurations should be built on which machines.
@@ -155,8 +73,6 @@ The **builds** section links platforms and recipes, defining which configuration
 | executables[^7]   |  list   | (**Optional**) List of executables to profile for this build               |
 
 ---
-
-[^7]: Each path in `executables` must be specified relative to the build directory created for this build. For example, use `bin/app` rather than an absolute path. If `executables` is not specified, Amphimixis will profile the first executable file it finds in the build directory.
 
 Example:
 
@@ -188,3 +104,89 @@ builds:
 > **Note:**
 >
 > - YAML references (& and *) let you reuse the same `executables` list across multiple builds, reducing duplication.
+
+[^1]: `CMake` and `Make` are supported as build systems. If not specified, it is automatically selected from the set of build systems supported by the project.
+
+[^2]: `Make` and `Ninja` are supported as runners (low-level build system). If not specified, it is automatically selected from the supported runners of the selected build system.
+
+[^3]: Default value: 22. The `port` must be within the range 1-65535.
+
+[^4]: If the user uses SSH keys, start `ssh-agent` in the current shell and add the required keys for each remote machine manually with `ssh-add` before running Amphimixis. In this case, the password does not need to be provided. **Please note that passwords are passed to SSH through sshpass, which is not secure.**
+
+[^5]: Possible compiler flags:
+
+    <details>
+    <summary>Possible attributes:</summary>
+
+    - c_flags
+    - cxx_flags
+    - csharp_flags
+    - cuda_flags
+    - objc_flags
+    - objcxx_flags
+    - fortran_flags
+    - hip_flags
+    - ispc_flags
+    - swift_flags
+    - asm_flags
+    - asm_nasm_flags
+    - asm_marmasm_flags
+    - asm_masm_flags
+    - asm_att_flags
+
+    </details>
+
+[^6]: Possible toolchain attributes:
+
+    <details>
+    <summary>Possible attributes of a toolchain:</summary>
+
+    - ar
+    - as
+    - ld
+    - nm
+    - objcopy
+    - objdump
+    - ranlib
+    - readelf
+    - strip
+    - c_compiler
+    - cxx_compiler
+    - csharp_compiler
+    - cuda_compiler
+    - objc_compiler
+    - objcxx_compiler
+    - fortran_compiler
+    - hip_compiler
+    - ispc_compiler
+    - swift_compiler
+    - asm_compiler
+    - asm_nasm_compiler
+    - asm_marmasm_compiler
+    - asm_masm_compiler
+    - asm_att_compiler
+
+    </details>
+
+    <details>
+    <summary>You can also specify flags to the toolchain:</summary>
+
+    - c_flags
+    - cxx_flags
+    - csharp_flags
+    - cuda_flags
+    - objc_flags
+    - objcxx_flags
+    - fortran_flags
+    - hip_flags
+    - ispc_flags
+    - swift_flags
+    - asm_flags
+    - asm_nasm_flags
+    - asm_marmasm_flags
+    - asm_masm_flags
+    - asm_att_flags
+
+    </details>
+
+[^7]: Each path in `executables` must be specified relative to the build directory created for this build. For example, use `bin/app` rather than an absolute path. If `executables` is not specified, Amphimixis will profile the first executable file it finds in the build directory.
