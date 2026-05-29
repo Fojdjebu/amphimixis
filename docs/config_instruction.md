@@ -67,54 +67,60 @@ The **recipes** section describes the build configuration and compiler flags.
 | sysroot                                         | string  | (**Optional**) Path to the folder with system headers and libraries used by the toolchain |
 | jobs                                            | integer | (**Optional**) Number of parallel jobs used by the build system                           |
 
-[^5]:<details><summary>Possible attributes:</summary>
+[^5]:
+  <details>
 
-- c_flags
-- cxx_flags
-- csharp_flags
-- cuda_flags
-- objc_flags
-- objcxx_flags
-- fortran_flags
-- hip_flags
-- ispc_flags
-- swift_flags
-- asm_flags
-- asm_nasm_flags
-- asm_marmasm_flags
-- asm_masm_flags
-- asm_att_flags
+  <summary>Possible attributes:</summary>
 
-</details>
+  - c_flags
+  - cxx_flags
+  - csharp_flags
+  - cuda_flags
+  - objc_flags
+  - objcxx_flags
+  - fortran_flags
+  - hip_flags
+  - ispc_flags
+  - swift_flags
+  - asm_flags
+  - asm_nasm_flags
+  - asm_marmasm_flags
+  - asm_masm_flags
+  - asm_att_flags
 
-[^6]:<details><summary>Possible attributes of a toolchain:</summary>
+  </details>
 
-- ar
-- as
-- ld
-- nm
-- objcopy
-- objdump
-- ranlib
-- readelf
-- strip
-- c_compiler
-- cxx_compiler
-- csharp_compiler
-- cuda_compiler
-- objc_compiler
-- objcxx_compiler
-- fortran_compiler
-- hip_compiler
-- ispc_compiler
-- swift_compiler
-- asm_compiler
-- asm_nasm_compiler
-- asm_marmasm_compiler
-- asm_masm_compiler
-- asm_att_compiler
+[^6]:
+  <details>
 
-</details>
+  <summary>Possible attributes of a toolchain:</summary>
+
+  - ar
+  - as
+  - ld
+  - nm
+  - objcopy
+  - objdump
+  - ranlib
+  - readelf
+  - strip
+  - c_compiler
+  - cxx_compiler
+  - csharp_compiler
+  - cuda_compiler
+  - objc_compiler
+  - objcxx_compiler
+  - fortran_compiler
+  - hip_compiler
+  - ispc_compiler
+  - swift_compiler
+  - asm_compiler
+  - asm_nasm_compiler
+  - asm_marmasm_compiler
+  - asm_masm_compiler
+  - asm_att_compiler
+
+  </details>
 
 <details>
 <summary>You can also specify flags to the toolchain:</summary>
