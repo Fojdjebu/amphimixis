@@ -23,8 +23,15 @@ python3 --version
 If your system Python is older, install a newer version or use `uv` to manage Python versions:
 
 ```bash
-uv python install 3.12
 uv venv --python 3.12
+source .venv/bin/activate
+uv pip install git+https://github.com/ebzych/amphimixis.git@stable
+```
+
+Or you can install Python 3.12 from your distribution or from python.org, then create a virtual environment and install Amphimixis with `pip`:
+
+```bash
+python3.12 -m venv .venv
 source .venv/bin/activate
 pip install git+https://github.com/ebzych/amphimixis.git@stable
 ```
@@ -38,6 +45,12 @@ source .venv/bin/activate
 amixis --help
 ```
 
+If you are using `uv`, you can also run `amixis` without activating the environment:
+
+```bash
+uv run amixis --help
+```
+
 If you installed with `pip install --user`, ensure `~/.local/bin` is on your `PATH`.
 
 ## System Dependencies
@@ -46,8 +59,22 @@ If you installed with `pip install --user`, ensure `~/.local/bin` is on your `PA
 
 `perf` is part of the Linux kernel tools package. Install it **on each machine** where profiling will run:
 
+- **Debian / Ubuntu:**
+
 ```bash
 apt install linux-tools-common linux-tools-generic
+```
+
+- **Arch Linux:**
+
+```bash
+pacman -S perf
+```
+
+- **Fedora:**
+
+```bash
+dnf install perf
 ```
 
 ### `perf archive` is not available
@@ -57,7 +84,7 @@ Some distributions (notably Ubuntu) ship `perf` without `perf archive`. This scr
 ```bash
 sudo mkdir -p /usr/libexec/perf-core
 curl -s https://raw.githubusercontent.com/torvalds/linux/master/tools/perf/perf-archive.sh | sudo tee /usr/libexec/perf-core/perf-archive
-sudo chmod +x /usr/libexec/perf-core/perf-archive
+chmod +x /usr/libexec/perf-core/perf-archive
 ```
 
 See the [original discussion](https://linux-perf-users.vger.kernel.narkive.com/gjAAds7D/perf-archive-is-not-a-perf-command).
@@ -66,35 +93,54 @@ See the [original discussion](https://linux-perf-users.vger.kernel.narkive.com/g
 
 `rsync` must be installed **on each machine** referenced in your `input.yml`:
 
+- **Debian / Ubuntu:**
+
 ```bash
 apt install rsync
+```
+
+- **Arch Linux:**
+
+```bash
+pacman -S rsync
+```
+
+- **Fedora:**
+
+```bash
+dnf install rsync
 ```
 
 ### `sshpass` not found
 
 `sshpass` is required only when connecting to remote machines with password authentication. Install it on the machine where you run Amphimixis:
 
+- **Debian / Ubuntu:**
+
 ```bash
 apt install sshpass
 ```
 
-If your configuration uses remote machines authenticated with SSH keys, start ssh-agent in the current shell and add the required keys before running the tool:
+- **Arch Linux:**
+
+```bash
+pacman -S sshpass
+```
+
+- **Fedora:**
+
+```bash
+dnf install sshpass
+```
+
+If your configuration uses remote machines authenticated with SSH keys instead of passwords, start `ssh-agent` and add your private key **before** running Amphimixis:
 
 ```bash
 eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_remote_machine
+ssh-add ~/.ssh/<your_private_key_name>
 ```
 
 ## Build Failures
-
-### Unsupported build system detected
-
-Amphimixis currently supports **CMake** and **Make** as build systems, with **Make** and **Ninja** as runners. If your project uses a different build system (e.g., Meson, Gradle, Bazel), you can still try specifying CMake explicitly in `input.yml` if a `CMakeLists.txt` exists:
-
-```yaml
-build_system: CMake
-runner: Make
-```
 
 ### CMake configuration fails
 
@@ -132,13 +178,13 @@ amixis validate /path/to/input.yml
 Common mistakes:
 
 - Missing required fields: `platforms`, `recipes`, `builds` must be non-empty lists
-- `build_machine` or `run_machine` references a `platform_id` that does not exist
+- `build_machine` or `run_machine` references a `platform`:`id` that does not exist
 - `recipe_id` references a recipe that does not exist
 - `port` outside the valid range (1-65535)
 
 ### What happens if `build_system` or `runner` is omitted
 
-Amphimixis will auto-detect them from the target project. If the project has a `CMakeLists.txt`, CMake is selected. If a `Makefile` is found, Make is used. The runner defaults to Make if the build system is CMake, or to the project's native runner.
+Amphimixis will auto-detect them from the target project. If the project has a `CMakeLists.txt`, CMake is selected. Else if a `Makefile` is found, Make is used. The runner defaults to Ninja if the build system is CMake.
 
 ### How to reuse the same `executables` list across multiple builds
 
@@ -170,13 +216,13 @@ This can happen if:
 - The perf events specified with `--events` are not supported on the current hardware
 - `perf_event_paranoid` is set too high
 
-Check supported events:
+Check supported events **on the `run_machine`**:
 
 ```bash
 perf list
 ```
 
-Lower the paranoid level if needed (requires root):
+Lower the paranoid level if needed (requires root). This must be done **on each`run_machine`**:
 
 ```bash
 echo '-1' | sudo tee /proc/sys/kernel/perf_event_paranoid
@@ -184,10 +230,11 @@ echo '-1' | sudo tee /proc/sys/kernel/perf_event_paranoid
 
 ### `perf` reports "Permission denied"
 
-Set the paranoid level to allow user-space profiling:
+Set the paranoid level to allow user-space profiling. This must be done **on each `run_machine`**:
 
 ```bash
-echo '-1' | sudo tee /proc/sys/kernel/perf_event_paranoid
+echo 'kernel.perf_event_paranoid = -1' > /etc/sysctl.d/99-amphimixis-perf.conf
+sysctl --system
 ```
 
 This setting does not persist across reboots. To make it permanent, add to `/etc/sysctl.conf`:
