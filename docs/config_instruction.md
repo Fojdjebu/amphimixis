@@ -67,10 +67,7 @@ The **recipes** section describes the build configuration and compiler flags.
 | sysroot                                         | string  | (**Optional**) Path to the folder with system headers and libraries used by the toolchain |
 | jobs                                            | integer | (**Optional**) Number of parallel jobs used by the build system                           |
 
-[^5]:
-
-<details>
-<summary>Possible attributes:</summary>
+[^5]:<details><summary>Possible attributes:</summary>
 
 - c_flags
 - cxx_flags
@@ -90,10 +87,7 @@ The **recipes** section describes the build configuration and compiler flags.
 
 </details>
 
-[^6]:
-
-<details>
-<summary>Possible attributes of a toolchain:</summary>
+[^6]:<details><summary>Possible attributes of a toolchain:</summary>
 
 - ar
 - as
