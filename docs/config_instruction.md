@@ -116,7 +116,7 @@ builds:
 [^5]: Possible compiler flags:
 
     <details>
-    <summary>Possible attributes:</summary>
+    <summary>All supported flags:</summary>
 
     - c_flags
     - cxx_flags
@@ -139,7 +139,7 @@ builds:
 [^6]: Possible toolchain attributes:
 
     <details>
-    <summary>Possible attributes of a toolchain:</summary>
+    <summary>All supported tools:</summary>
 
     - ar
     - as
