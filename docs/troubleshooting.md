@@ -24,7 +24,6 @@ If your system Python is older, install a newer version or use `uv` to manage Py
 
 ```bash
 uv venv --python 3.12
-source .venv/bin/activate
 uv pip install git+https://github.com/ebzych/amphimixis.git@stable
 ```
 
@@ -84,7 +83,7 @@ Some distributions (notably Ubuntu) ship `perf` without `perf archive`. This scr
 ```bash
 sudo mkdir -p /usr/libexec/perf-core
 curl -s https://raw.githubusercontent.com/torvalds/linux/master/tools/perf/perf-archive.sh | sudo tee /usr/libexec/perf-core/perf-archive
-chmod +x /usr/libexec/perf-core/perf-archive
+sudo chmod +x /usr/libexec/perf-core/perf-archive
 ```
 
 See the [original discussion](https://linux-perf-users.vger.kernel.narkive.com/gjAAds7D/perf-archive-is-not-a-perf-command).
@@ -182,11 +181,11 @@ Common mistakes:
 - `recipe_id` references a recipe that does not exist
 - `port` outside the valid range (1-65535)
 
-### What happens if `build_system` or `runner` is omitted
+### `build_system` or `runner` was not specified
 
 Amphimixis will auto-detect them from the target project. If the project has a `CMakeLists.txt`, CMake is selected. Else if a `Makefile` is found, Make is used. The runner defaults to Ninja if the build system is CMake.
 
-### How to reuse the same `executables` list across multiple builds
+### `executables` list is duplicated across builds
 
 Use YAML anchors and aliases to avoid duplication:
 
@@ -208,7 +207,7 @@ builds:
 
 ## Profiling Failures
 
-### Empty or minimal profiling output
+### `perf` produces no data or reports "Permission denied"
 
 This can happen if:
 
@@ -222,25 +221,19 @@ Check supported events **on the `run_machine`**:
 perf list
 ```
 
-Lower the paranoid level if needed (requires root). This must be done **on each`run_machine`**:
+Lower the paranoid level if needed (requires root). This must be done **on each `run_machine`**.
+
+Temporary change (until next reboot):
 
 ```bash
 echo '-1' | sudo tee /proc/sys/kernel/perf_event_paranoid
 ```
 
-### `perf` reports "Permission denied"
-
-Set the paranoid level to allow user-space profiling. This must be done **on each `run_machine`**:
+Persistent change (survives reboots, recommended on modern Linux systems): create a configuration file in `/etc/sysctl.d/` and apply it:
 
 ```bash
-echo 'kernel.perf_event_paranoid = -1' > /etc/sysctl.d/99-amphimixis-perf.conf
-sysctl --system
-```
-
-This setting does not persist across reboots. To make it permanent, add to `/etc/sysctl.conf`:
-
-```
-kernel.perf_event_paranoid = -1
+echo 'kernel.perf_event_paranoid = -1' | sudo tee /etc/sysctl.d/99-amphimixis-perf.conf
+sudo sysctl --system
 ```
 
 ### Comparing outputs from different machines
