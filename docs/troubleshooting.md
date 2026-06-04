@@ -54,6 +54,8 @@ If you installed with `pip install --user`, ensure `~/.local/bin` is on your `PA
 
 ## System Dependencies
 
+> **Note:** The commands in this section require root privileges. Run them with `sudo` or as root.
+
 ### `perf` command not found
 
 `perf` is part of the Linux kernel tools package. Install it **on each machine** where profiling will run:
@@ -61,19 +63,19 @@ If you installed with `pip install --user`, ensure `~/.local/bin` is on your `PA
 - **Debian / Ubuntu:**
 
 ```bash
-sudo apt install linux-tools-common linux-tools-generic
+apt install linux-tools-common linux-tools-generic
 ```
 
 - **Arch Linux:**
 
 ```bash
-sudo pacman -S perf
+pacman -S perf
 ```
 
 - **Fedora:**
 
 ```bash
-sudo dnf install perf
+dnf install perf
 ```
 
 ### `perf archive` is not available
@@ -81,9 +83,9 @@ sudo dnf install perf
 Some distributions (notably Ubuntu) ship `perf` without `perf archive`. This script is required to resolve build IDs after profiling. Fix it by downloading the script from the Linux kernel repository:
 
 ```bash
-sudo mkdir -p /usr/libexec/perf-core
-curl -s https://raw.githubusercontent.com/torvalds/linux/master/tools/perf/perf-archive.sh | sudo tee /usr/libexec/perf-core/perf-archive
-sudo chmod +x /usr/libexec/perf-core/perf-archive
+mkdir -p /usr/libexec/perf-core
+curl -s https://raw.githubusercontent.com/torvalds/linux/master/tools/perf/perf-archive.sh | tee /usr/libexec/perf-core/perf-archive
+chmod +x /usr/libexec/perf-core/perf-archive
 ```
 
 See the [original discussion](https://linux-perf-users.vger.kernel.narkive.com/gjAAds7D/perf-archive-is-not-a-perf-command).
@@ -95,19 +97,19 @@ See the [original discussion](https://linux-perf-users.vger.kernel.narkive.com/g
 - **Debian / Ubuntu:**
 
 ```bash
-sudo apt install rsync
+apt install rsync
 ```
 
 - **Arch Linux:**
 
 ```bash
-sudo pacman -S rsync
+pacman -S rsync
 ```
 
 - **Fedora:**
 
 ```bash
-sudo dnf install rsync
+dnf install rsync
 ```
 
 ### `sshpass` not found
@@ -117,19 +119,19 @@ sudo dnf install rsync
 - **Debian / Ubuntu:**
 
 ```bash
-sudo apt install sshpass
+apt install sshpass
 ```
 
 - **Arch Linux:**
 
 ```bash
-sudo pacman -S sshpass
+pacman -S sshpass
 ```
 
 - **Fedora:**
 
 ```bash
-sudo dnf install sshpass
+dnf install sshpass
 ```
 
 If your configuration uses remote machines authenticated with SSH keys instead of passwords, start `ssh-agent` and add your private key **before** running Amphimixis:
@@ -207,6 +209,8 @@ builds:
 
 ## Profiling Failures
 
+> **Note:** Commands that modify kernel parameters require root privileges. Run them with `sudo` or as root.
+
 ### `perf` produces no data or reports "Permission denied"
 
 This can happen if:
@@ -226,14 +230,14 @@ Lower the paranoid level if needed (requires root). This must be done **on each 
 Temporary change (until next reboot):
 
 ```bash
-echo '-1' | sudo tee /proc/sys/kernel/perf_event_paranoid
+echo '-1' | tee /proc/sys/kernel/perf_event_paranoid
 ```
 
 Persistent change (survives reboots, recommended on modern Linux systems): create a configuration file in `/etc/sysctl.d/` and apply it:
 
 ```bash
-echo 'kernel.perf_event_paranoid = -1' | sudo tee /etc/sysctl.d/99-amphimixis-perf.conf
-sudo sysctl --system
+echo 'kernel.perf_event_paranoid = -1' | tee /etc/sysctl.d/99-amphimixis-perf.conf
+sysctl --system
 ```
 
 ### Comparing outputs from different machines
