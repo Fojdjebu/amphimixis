@@ -27,10 +27,10 @@ uv venv --python 3.12
 uv pip install git+https://github.com/ebzych/amphimixis.git@stable
 ```
 
-Or you can install Python 3.12 from your distribution or from python.org, then create a virtual environment and install Amphimixis with `pip`:
+Or you can install Python 3.12 or newer from your distribution or from python.org, then create a virtual environment and install Amphimixis with `pip`:
 
 ```bash
-python3.12 -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 pip install git+https://github.com/ebzych/amphimixis.git@stable
 ```
@@ -84,7 +84,7 @@ Some distributions (notably Ubuntu) ship `perf` without `perf archive`. This scr
 
 ```bash
 mkdir -p /usr/libexec/perf-core
-curl -s https://raw.githubusercontent.com/torvalds/linux/master/tools/perf/perf-archive.sh | tee /usr/libexec/perf-core/perf-archive
+curl -s https://raw.githubusercontent.com/torvalds/linux/master/tools/perf/perf-archive.sh > /usr/libexec/perf-core/perf-archive
 chmod +x /usr/libexec/perf-core/perf-archive
 ```
 
@@ -230,13 +230,13 @@ Lower the paranoid level if needed (requires root). This must be done **on each 
 Temporary change (until next reboot):
 
 ```bash
-echo '-1' | tee /proc/sys/kernel/perf_event_paranoid
+echo '-1' > /proc/sys/kernel/perf_event_paranoid
 ```
 
 Persistent change (survives reboots, recommended on modern Linux systems): create a configuration file in `/etc/sysctl.d/` and apply it:
 
 ```bash
-echo 'kernel.perf_event_paranoid = -1' | tee /etc/sysctl.d/99-amphimixis-perf.conf
+echo 'kernel.perf_event_paranoid = -1' > /etc/sysctl.d/99-amphimixis-perf.conf
 sysctl --system
 ```
 
