@@ -61,19 +61,19 @@ If you installed with `pip install --user`, ensure `~/.local/bin` is on your `PA
 - **Debian / Ubuntu:**
 
 ```bash
-apt install linux-tools-common linux-tools-generic
+sudo apt install linux-tools-common linux-tools-generic
 ```
 
 - **Arch Linux:**
 
 ```bash
-pacman -S perf
+sudo pacman -S perf
 ```
 
 - **Fedora:**
 
 ```bash
-dnf install perf
+sudo dnf install perf
 ```
 
 ### `perf archive` is not available
@@ -95,19 +95,19 @@ See the [original discussion](https://linux-perf-users.vger.kernel.narkive.com/g
 - **Debian / Ubuntu:**
 
 ```bash
-apt install rsync
+sudo apt install rsync
 ```
 
 - **Arch Linux:**
 
 ```bash
-pacman -S rsync
+sudo pacman -S rsync
 ```
 
 - **Fedora:**
 
 ```bash
-dnf install rsync
+sudo dnf install rsync
 ```
 
 ### `sshpass` not found
@@ -117,19 +117,19 @@ dnf install rsync
 - **Debian / Ubuntu:**
 
 ```bash
-apt install sshpass
+sudo apt install sshpass
 ```
 
 - **Arch Linux:**
 
 ```bash
-pacman -S sshpass
+sudo pacman -S sshpass
 ```
 
 - **Fedora:**
 
 ```bash
-dnf install sshpass
+sudo dnf install sshpass
 ```
 
 If your configuration uses remote machines authenticated with SSH keys instead of passwords, start `ssh-agent` and add your private key **before** running Amphimixis:
