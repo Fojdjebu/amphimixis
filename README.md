@@ -8,22 +8,18 @@
 
 Amphimixis is an automated project intelligence and evaluation tool for performance and migration readiness. It helps inspect a project for existing infrastructure such as CI, tests, benchmarks, dependencies, and build scripts, then runs builds and collects performance data for further comparison.
 
-Amphimixis simplifies migration readiness exploration and performance analysis by partially implementing our [methodology](docs/migration-readiness-exploring-methodology.md).
+Amphimixis simplifies migration readiness exploration and performance analysis by partially implementing our [methodology](docs/methodologies/migration-readiness-exploring-methodology.md).
 
 > Amphimixis uses `perf` for profiling and can generate a cross‑table comparing two builds per CPU event.
 
 ## Performance cross-table example
 
-The cross‑table below was generated using the configuration file on the right. It compares two builds of a YAML‑based project on a local x86 machine (CMake + Ninja, two builds sharing executables via YAML anchors).
+The cross‑table below compares two builds of a YAML‑based project on a local **x86** machine (CMake + Ninja, two builds sharing executables via YAML anchors).
 
 ![Cross-table example](docs/tinyxml2-cross-table-example.png)
 
-**What does the configuration contain?**  
-The file on the right defines:
-
-- One x86 platform (address, credentials, SSH port).
-- Two recipes with identical compiler flags (`-O2`) and the same toolchain (`g++`).
-- Two builds, each referencing the same recipe, both using an executable list tied to a YAML anchor to avoid duplication.
+**What does a crosstab contain?**
+The cross-table displays gathered performance counter profiles (by CPU events for each function) of the two builds for performance comparison.
 
 **Why are there zeros in the cross‑table?**  
 The two builds were executed on different architectures: `1_1_1` on **RISC‑V** and `2_2_2` on **x86**. Perf events like `cache‑misses` have different naming conventions or are not available on RISC‑V. That is why the first build shows zeros for those metrics, while the second build records actual numbers. The delta column highlights only the differences that appear in both builds, making it easy to spot architecture‑specific behaviour.
@@ -50,73 +46,13 @@ amixis init local
 amixis run /path/to/project --config local.yml
 ```
 
-<p align="left">
+## Documentation
 
-<img align="right" src="docs/config-example.png" alt="Configuration file example" width="300">
-
-## Note
-
-By default, your working directory must have an `input.yml` or other configuration file that you can specify with the `--config` flag. The format is described in [Config instruction](docs/config_instruction.md).
-
-</p>
-
-If your `input.yml` contains remote machines authenticated with SSH keys, start `ssh-agent` in the current shell and add the required keys manually before running `amixis`:
-
-```bash
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_remote_machine
-```
-
-## What Amphimixis does
-
-Amphimixis can:
-
-- <i>analyze</i> a project for CI, tests, benchmarks, build system configuration, and dependencies
-- <i>build</i> the project with configured recipes and platforms
-- <i>profile</i> executable runs and collect timing and `perf`-based statistics
-- <i>compare</i> profiling outputs produced for different builds and put them into a <u><i>cross-table for each CPU event</i></u>
-
-## Typical usage
-
-Prepare a working directory with an `input.yml` configuration file. The configuration format is described in [Config instruction](docs/config_instruction.md).
-
-Run the full workflow for a project:
-
-```bash
-amixis run /path/to/project
-```
-
-This command:
-
-1. analyzes the project
-1. builds it using the selected configuration
-1. profiles the resulting executables
-1. prints profiling results in the console
-
-To compare two collected `perf` outputs:
-
-```bash
-amixis compare build1.scriptout build2.scriptout --max-rows 10
-```
-
-`compare` accepts exactly two `.scriptout` files. `--max-rows` limits how many symbols with the largest delta are shown for each event.
-
-For step-by-step command examples, custom configuration files, and `--events` usage, see [Usage guide](docs/usage_guide.md).
-
-## Build and run notes
-
-The tool is distributed as a Python package with the `amixis` CLI entry point.
-
-For local development and reproducible checks, the repository uses `uv` and GitHub Actions. The CI configuration is available in [.github/workflows/ci.yml](.github/workflows/ci.yml).
-
-Useful commands during development (run from the repository root, where `pyproject.toml` is located):
-
-```bash
-uv run amixis --help
-uv run pytest
-```
-
-If you want a more detailed walkthrough with installation options, workspace preparation, and command examples, see [Usage guide](docs/usage_guide.md).
+- [Usage guide](docs/usage_guide.md) — installation options, workspace setup, all commands, perf events, SSH auth
+- [Config instruction](docs/config_instruction.md) — full `input.yml` schema reference
+- [Troubleshooting](docs/troubleshooting.md) — common issues and solutions
+- [Contributing guide](CONTRIBUTING.md) — how to contribute, local checks, pull request guidelines
+- [Migration readiness exploring methodology](docs/methodologies/migration-readiness-exploring-methodology.md) — systematic process for evaluating cross-platform migration readiness
 
 ## Project structure
 
@@ -130,14 +66,6 @@ The repository is organized around a small CLI and several core modules:
 - [amphimixis/core/shell](amphimixis/core/shell) contains local and remote shell backends
 - [amphimixis/core/build_systems](amphimixis/core/build_systems) adapts build systems (CMake, Make, Ninja)
 - [docs](docs) contains user-facing documentation
-
-## Documentation
-
-Additional documentation:
-
-- [Usage guide](docs/usage_guide.md)
-- [Config instruction](docs/config_instruction.md)
-- [Migration readiness exploring methodology](docs/migration-readiness-exploring-methodology.md)
 
 ## How To Help
 
