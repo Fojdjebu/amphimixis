@@ -4,3 +4,4 @@ __pycache__/
 config.json
 config.yaml
 /input.yml
+docs/sphinx/build/

@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import sys
+import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
+_pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+version = _pyproject["project"]["version"]
+release = version
 
 project = "Amphimixis"
 author = "Amphimixis contributors"
@@ -49,6 +53,7 @@ intersphinx_mapping = {
 myst_enable_extensions = [
     "colon_fence",
 ]
+myst_heading_anchors = 4
 
 templates_path = ["_templates"]
 html_theme = "furo"
@@ -72,4 +77,5 @@ html_theme_options = {
 html_title = "Amphimixis"
 html_short_title = "Amphimixis"
 html_baseurl = "https://amphimixis.org/"
+html_logo = "_static/logo.jpg"
 html_favicon = "favicon.ico"
