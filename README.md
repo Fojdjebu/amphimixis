@@ -1,6 +1,6 @@
-[![CI](https://github.com/ebzych/amphimixis/actions/workflows/ci.yml/badge.svg)](https://github.com/ebzych/amphimixis/actions/workflows/ci.yml)
-[![Docs](https://img.shields.io/badge/docs-available-blue)](https://github.com/ebzych/amphimixis/tree/main/docs)
-[![License](https://img.shields.io/github/license/ebzych/amphimixis?color=8A2BE2)](https://github.com/ebzych/amphimixis/blob/main/LICENSE)
+[![CI](https://github.com/Amphimixis/amphimixis/actions/workflows/ci.yml/badge.svg)](https://github.com/Amphimixis/amphimixis/actions/workflows/ci.yml)
+[![Docs](https://img.shields.io/badge/docs-available-blue)](https://github.com/Amphimixis/amphimixis/tree/main/docs)
+[![License](https://img.shields.io/github/license/ebzych/amphimixis?color=8A2BE2)](https://github.com/Amphimixis/amphimixis/blob/main/LICENSE)
 
 ![Amphimixis Logo](docs/logo.jpg)
 
@@ -41,7 +41,7 @@ If you want to try Amphimixis right away, create a virtual environment, install 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install git+https://github.com/ebzych/amphimixis.git@stable
+pip install git+https://github.com/Amphimixis/amphimixis.git@stable
 amixis init local
 amixis run /path/to/project --config local.yml
 ```

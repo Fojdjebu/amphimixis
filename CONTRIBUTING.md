@@ -30,7 +30,7 @@ Current project requirements:
 To set up the project locally:
 
 ```bash
-git clone https://github.com/ebzych/amphimixis.git
+git clone https://github.com/Amphimixis/amphimixis.git
 cd amphimixis
 uv sync
 ```

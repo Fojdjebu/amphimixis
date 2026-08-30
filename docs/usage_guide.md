@@ -2,14 +2,20 @@
 
 ## Table of Contents
 
-- [Choose an installation method](#choose-an-installation-method)
-- [Prepare a workspace](#prepare-a-workspace)
-- [Run the main workflow](#run-the-main-workflow)
-- [Run individual commands](#run-individual-commands)
-- [Work with perf events](#work-with-perf-events)
-- [Compare profiling outputs](#compare-profiling-outputs)
-- [Add a toolchain](#add-a-toolchain)
-- [Clean build directories](#clean-build-directories)
+- [Usage guide](#usage-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Choose an installation method](#choose-an-installation-method)
+  - [Prepare a workspace](#prepare-a-workspace)
+    - [Make sure the required system tools are available](#make-sure-the-required-system-tools-are-available)
+    - [Create a configuration file](#create-a-configuration-file)
+    - [Understand the expected configuration](#understand-the-expected-configuration)
+    - [Using SSH keys](#using-ssh-keys)
+  - [Run the main workflow](#run-the-main-workflow)
+  - [Run individual commands](#run-individual-commands)
+  - [Work with perf events](#work-with-perf-events)
+  - [Compare profiling outputs](#compare-profiling-outputs)
+  - [Add a toolchain](#add-a-toolchain)
+  - [Clean build directories](#clean-build-directories)
 
 ---
 
@@ -22,7 +28,7 @@ For most users, the recommended path is to create a virtual environment and inst
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install git+https://github.com/ebzych/amphimixis.git@stable
+pip install git+https://github.com/Amphimixis/amphimixis
 ```
 
 This is the recommended path if you only want to run `amixis` and do not want to install anything into the system Python environment.
@@ -30,7 +36,7 @@ This is the recommended path if you only want to run `amixis` and do not want to
 If you are developing Amphimixis itself, clone the repository and install dependencies with `uv`:
 
 ```bash
-git clone https://github.com/ebzych/amphimixis.git
+git clone https://github.com/Amphimixis/amphimixis
 cd amphimixis
 uv sync
 ```
