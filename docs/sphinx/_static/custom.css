@@ -1,14 +1,26 @@
 .github-star-link {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
   margin-top: 0.3rem;
   padding: var(--sidebar-item-spacing-horizontal);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 1.05rem;
   color: var(--color-foreground-muted);
+}
+.github-star-link svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 .github-star-link:hover {
   color: var(--color-brand-primary);
   text-decoration: none;
 }
+
+.toc-drawer {
+  --toc-font-size: var(--font-size--normal);
+  --toc-title-font-size: var(--font-size--small);
+  --toc-item-spacing-vertical: 0.5rem;
+}
+.toc-drawer .toc-tree { line-height: 1.4; }
