@@ -2,6 +2,8 @@
 
 This page covers common issues and their solutions when using Amphimixis.
 
+<!-- DOC-TOC -->
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -9,6 +11,8 @@ This page covers common issues and their solutions when using Amphimixis.
 - [Build Failures](#build-failures)
 - [Configuration Failures](#configuration-failures)
 - [Profiling Failures](#profiling-failures)
+
+<!-- /DOC-TOC -->
 
 ## Installation
 

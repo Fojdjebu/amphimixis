@@ -1,5 +1,6 @@
 # Usage guide
 
+<!-- DOC-TOC -->
 ## Table of Contents
 
 - [Usage guide](#usage-guide)
@@ -18,6 +19,8 @@
   - [Clean build directories](#clean-build-directories)
 
 ---
+
+<!-- /DOC-TOC -->
 
 > If you encounter issues while using Amphimixis, see [Troubleshooting](troubleshooting.md) for common problems and solutions.
 
