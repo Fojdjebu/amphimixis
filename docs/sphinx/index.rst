@@ -84,50 +84,9 @@ Amphimixis can:
 - compare profiling outputs produced for different builds and put them into a
   cross-table for each CPU event.
 
-User Guides
------------
-
-- :doc:`usage_guide`
-- :doc:`config_instruction`
-- :doc:`troubleshooting`
-
-Main Workflows
---------------
-
-- :doc:`api/analyzer`
-- :doc:`api/configurator`
-- :doc:`api/builder`
-- :doc:`api/profiler`
-
-Supporting Modules
-------------------
-
-- :doc:`api/amixis`
-- :doc:`api/core_types`
-- :doc:`api/misc`
-
 .. toctree::
    :maxdepth: 2
-   :caption: Main Modules
-   :hidden:
-
-   api/analyzer
-   api/configurator
-   api/builder
-   api/profiler
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Supporting Modules
-   :hidden:
-
-   api/amixis
-   api/core_types
-   api/misc
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Guides
+   :caption: Getting Started
 
    usage_guide
    config_instruction
@@ -135,7 +94,7 @@ Supporting Modules
    troubleshooting
 
 .. toctree::
-   :maxdepth: 2
-   :caption: API Reference
+   :maxdepth: 1
+   :caption: Technical
 
    api/index
