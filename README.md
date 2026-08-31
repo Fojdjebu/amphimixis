@@ -26,13 +26,7 @@ The two builds were executed on different architectures: `1_1_1` on **RISC‑V**
 
 ## Requirements
 
-- Python 3.12 or later
-- Linux
-- `rsync` on each machine, `sshpass` on the machine that connects to remote hosts with passwords
-- `perf` and `perf archive` on each `run_machine`
-- Target project must support CMake as the build system and Make or Ninja as the low-level runner
-
-Installation commands for system dependencies are available in [Troubleshooting → System Dependencies](docs/troubleshooting.md).
+See [the usage guide](docs/usage_guide.md#requirements) for the full list of required tools and system dependencies.
 
 ## Quick start
 
