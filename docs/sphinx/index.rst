@@ -81,7 +81,6 @@ the package from GitHub, and run the full pipeline on a target project:
    :hidden:
 
    methodology
-   user_stories
 
 .. toctree::
    :maxdepth: 2
