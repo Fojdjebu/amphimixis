@@ -5,9 +5,9 @@
 
 - [Usage guide](#usage-guide)
   - [Table of Contents](#table-of-contents)
+  - [Requirements](#requirements)
   - [Choose an installation method](#choose-an-installation-method)
   - [Prepare a workspace](#prepare-a-workspace)
-    - [Make sure the required system tools are available](#make-sure-the-required-system-tools-are-available)
     - [Create a configuration file](#create-a-configuration-file)
     - [Understand the expected configuration](#understand-the-expected-configuration)
     - [Using SSH keys](#using-ssh-keys)
@@ -23,6 +23,17 @@
 <!-- /DOC-TOC -->
 
 > If you encounter issues while using Amphimixis, see [Troubleshooting](troubleshooting.md) for common problems and solutions.
+
+## Requirements
+
+- Python 3.12 or later
+- Linux
+- `rsync` on each machine
+- `sshpass` on the machine that connects to remote hosts with passwords
+- `perf` and `perf archive` on each `run_machine`
+- Target project must support CMake as the build system and Make or Ninja as the low-level runner
+
+See [Troubleshooting → System Dependencies](troubleshooting.md) for installation commands and the `perf archive` setup.
 
 ## Choose an installation method
 
@@ -56,12 +67,6 @@ pip install dist/*.whl
 ## Prepare a workspace
 
 Run Amphimixis from a working directory that contains your configuration and any generated artifacts. Before starting, create an `input.yml` file there.
-
-### Make sure the required system tools are available
-
-Required tools: `rsync` on each machine, `perf` and `perf archive` on each `run_machine`, and optionally `sshpass` for password-based SSH connections.
-
-See [Troubleshooting → System Dependencies](troubleshooting.md) for installation commands and the `perf archive` setup.
 
 ### Create a configuration file
 

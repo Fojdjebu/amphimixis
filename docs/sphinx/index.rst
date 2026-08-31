@@ -1,13 +1,19 @@
 Amphimixis Documentation
 ========================
 
-Amphimixis is an automated project intelligence and evaluation tool for
-performance and migration readiness. It helps inspect a project for existing
-infrastructure such as CI, tests, benchmarks, dependencies, and build scripts,
-then runs builds and collects performance data for further comparison.
+.. raw:: html
 
-Amphimixis uses ``perf`` for profiling and produces a cross-table with two
-builds per CPU event for comparison.
+   <p class="hero-tagline">Slogan goes here</p>
+
+.. container:: hero
+
+   Amphimixis is an automated project intelligence and evaluation tool for
+   performance and migration readiness. It helps inspect a project for existing
+   infrastructure such as CI, tests, benchmarks, dependencies, and build scripts,
+   then runs builds and collects performance data for further comparison.
+
+   Amphimixis uses ``perf`` for profiling and produces a cross-table with two
+   builds per CPU event for comparison.
 
 Who Is This For
 ---------------
@@ -45,6 +51,18 @@ Who Is This For
       Easy patch workflow for open-source contributors.
       CI validates changes automatically on every push.
 
+Requirements
+------------
+
+- Python 3.12 or later
+- Linux
+- ``rsync`` on each machine
+- ``sshpass`` on the machine that connects to remote hosts with passwords
+- ``perf`` and ``perf archive`` on each ``run_machine``
+- Target project must support CMake as the build system and Make or Ninja as the low-level runner
+
+See :doc:`troubleshooting` for installation commands and the ``perf archive`` setup.
+
 Quick Run
 ---------
 
@@ -59,34 +77,10 @@ the package from GitHub, and run the full pipeline on a target project:
    amixis init local
    amixis run /path/to/project --config local.yml
 
-Requirements
-------------
-
-- Python 3.12 or later
-- Linux
-- ``rsync`` on each machine
-- ``sshpass`` on the machine where you run Amphimixis if you connect to remote
-  machines with passwords
-- ``perf`` on each ``run_machine``
-- ``perf archive`` on each ``run_machine``
-- a supported build setup in the target project: CMake as the build system and
-  Make as the low-level runner
-
-What Amphimixis Does
---------------------
-
-Amphimixis can:
-
-- analyze a project for CI, tests, benchmarks, build system configuration, and
-  dependencies;
-- build the project with configured recipes and platforms;
-- profile executable runs and collect timing and ``perf``-based statistics;
-- compare profiling outputs produced for different builds and put them into a
-  cross-table for each CPU event.
-
 .. toctree::
    :maxdepth: 2
    :caption: Getting Started
+   :hidden:
 
    usage_guide
    config_instruction
@@ -96,5 +90,6 @@ Amphimixis can:
 .. toctree::
    :maxdepth: 1
    :caption: Technical
+   :hidden:
 
    api/index
