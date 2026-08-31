@@ -23,6 +23,7 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_sitemap",
     "sphinx_design",
+    "sphinx_copybutton",
 ]
 
 source_suffix = {

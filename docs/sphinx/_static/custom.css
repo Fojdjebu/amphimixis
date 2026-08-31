@@ -24,3 +24,16 @@
   --toc-item-spacing-vertical: 0.5rem;
 }
 .toc-drawer .toc-tree { line-height: 1.4; }
+
+.highlight button.copybtn {
+    opacity: 0.9;
+    width: 1.4em;
+    height: 1.4em;
+    background-color: var(--color-background-hover, #651f94);
+    color: var(--color-foreground-muted);
+    border-color: var(--color-background-border, #1b1f2426);
+}
+.highlight:hover button.copybtn,
+button.copybtn.success {
+    opacity: 0.9;
+}
