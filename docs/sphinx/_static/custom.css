@@ -37,3 +37,21 @@
 button.copybtn.success {
     opacity: 0.9;
 }
+.hero {
+    text-align: center;
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-foreground-border);
+    border-left: 0.35em solid var(--color-brand-content);
+    border-radius: 0.5rem;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 2rem;
+}
+.hero-tagline {
+    color: var(--color-brand-content);
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 0 0 0.75rem;
+}
+.grid-item-card .sd-card-title {
+    color: var(--color-brand-content);
+}

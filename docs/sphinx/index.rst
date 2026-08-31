@@ -15,6 +15,31 @@ Amphimixis Documentation
    Amphimixis uses ``perf`` for profiling and produces a cross-table with two
    builds per CPU event for comparison.
 
+Workflow
+--------
+
+.. grid:: 1 1 4 4
+
+   .. grid-item-card:: Analyze
+      :text-align: center
+
+      Inspect CI, tests, benchmarks, build config and dependencies.
+
+   .. grid-item-card:: Build
+      :text-align: center
+
+      Build with configured recipes and platforms.
+
+   .. grid-item-card:: Profile
+      :text-align: center
+
+      Run executables and collect timing and ``perf`` statistics.
+
+   .. grid-item-card:: Compare
+      :text-align: center
+
+      Produce a cross-table per CPU event.
+
 Who Is This For
 ---------------
 
