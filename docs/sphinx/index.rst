@@ -111,6 +111,7 @@ the package from GitHub, and run the full pipeline on a target project:
    config_instruction
    input
    troubleshooting
+   methodology
 
 .. toctree::
    :maxdepth: 1
