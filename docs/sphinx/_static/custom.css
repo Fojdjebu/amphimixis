@@ -62,3 +62,21 @@ body {
     --color-link-underline--visited: var(--color-background-border);
     --color-link-underline--visited--hover: var(--color-background-border);
 }
+.github-header-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: inherit;
+}
+.content-icon-container .github-header-link {
+  color: var(--color-foreground-secondary);
+}
+.content-icon-container .github-header-link:hover {
+  color: var(--color-brand-primary);
+}
+.github-header-link svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
