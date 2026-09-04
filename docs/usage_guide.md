@@ -33,11 +33,11 @@
 - `perf` and `perf archive` on each `run_machine`
 - Target project must support CMake as the build system and Make or Ninja as the low-level runner
 
-See [Troubleshooting → System Dependencies](troubleshooting.md) for installation commands and the `perf archive` setup.
+See [Troubleshooting → System Dependencies](troubleshooting.md#system-dependencies) for installation commands and the `perf archive` setup.
 
 ## Choose an installation method
 
-For most users, the recommended path is to create a virtual environment and install directly from GitHub:
+- **For users — install `amixis` with pip:**
 
 ```bash
 python3 -m venv .venv
@@ -47,7 +47,7 @@ pip install git+https://github.com/Amphimixis/amphimixis
 
 This is the recommended path if you only want to run `amixis` and do not want to install anything into the system Python environment.
 
-If you are developing Amphimixis itself, clone the repository and install dependencies with `uv`:
+- **For development — clone and install with uv:**
 
 ```bash
 git clone https://github.com/Amphimixis/amphimixis
@@ -55,7 +55,7 @@ cd amphimixis
 uv sync
 ```
 
-If you specifically want to build a wheel locally and test the packaged artifact, use:
+- **To test the packaged artifact — build a local wheel:**
 
 ```bash
 python3 -m venv .venv
