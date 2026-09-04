@@ -63,12 +63,13 @@ html_theme_options = {
     "source_repository": "https://github.com/Amphimixis/amphimixis",
     "source_branch": "main",
     "source_directory": "docs/sphinx",
+    "sidebar_hide_name": True,
+    "light_logo": "logo-light.png",
+    "dark_logo": "logo-dark.png",
 }
 
 html_title = "Amphimixis"
 html_short_title = "Amphimixis"
 html_baseurl = "https://amphimixis.org/"
-html_logo = "_static/logo.jpg"
-html_favicon = "favicon.ico"
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
