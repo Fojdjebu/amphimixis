@@ -1,12 +1,6 @@
 Home Page
 ==========
 
-.. raw:: html
-
-   <p class="hero-tagline">Slogan goes here</p>
-
-.. container:: hero
-
    Amphimixis is an automated project intelligence and evaluation tool for
    performance and migration readiness. It helps inspect a project for existing
    infrastructure such as CI, tests, benchmarks, dependencies, and build scripts,
@@ -80,6 +74,7 @@ the package from GitHub, and run the full pipeline on a target project:
    :caption: For Users
    :hidden:
 
+   usage_examples
    methodology
 
 .. toctree::
