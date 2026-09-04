@@ -55,3 +55,10 @@ button.copybtn.success {
 .grid-item-card .sd-card-title {
     color: var(--color-brand-content);
 }
+
+body {
+    --color-link--visited: var(--color-brand-content);
+    --color-link--visited--hover: var(--color-brand-content);
+    --color-link-underline--visited: var(--color-background-border);
+    --color-link-underline--visited--hover: var(--color-background-border);
+}
