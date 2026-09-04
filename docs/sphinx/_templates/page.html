@@ -2,6 +2,8 @@
 
 {% block extrahead %}
   {{ super() }}
+  <link rel="icon" type="image/png" href="{{ pathto('_static/favicon-light.png', 1) }}" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="{{ pathto('_static/favicon-dark.png', 1) }}" media="(prefers-color-scheme: dark)">
   <meta name="description" content="Amphimixis is an automated project intelligence and evaluation tool for performance analysis and migration readiness.">
   <script type="application/ld+json">
   {
