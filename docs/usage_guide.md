@@ -1,9 +1,9 @@
-# Usage guide
+# Usage Guide
 
 <!-- DOC-TOC -->
 ## Table of Contents
 
-- [Usage guide](#usage-guide)
+- [Usage Guide](#usage-guide)
   - [Table of Contents](#table-of-contents)
   - [Requirements](#requirements)
   - [Choose an installation method](#choose-an-installation-method)
